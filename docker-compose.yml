@@ -10,22 +10,22 @@ services:
     volumes:
       - postgres:/data/postgres
     ports:
-      - 5432:5432
+      - 5422:5432
     networks:
       - book-network
     restart: unless-stopped
 
-mail-dev:
-  container_name: mail-dev-bn
-  image: maildev/maildev
-  ports:
-    - 1080:1080
-    - 1025:1025
+  mail-dev:
+    container_name: mail-dev-bn
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
 
-  networks:
-    book-network:
-      driver: bridge
+networks:
+  book-network:
+    driver: bridge
 
-  volumes:
-    postgres:
-      driver: local
+volumes:
+  postgres:
+    driver: local
