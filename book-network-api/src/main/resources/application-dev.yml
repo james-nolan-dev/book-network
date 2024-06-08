@@ -32,7 +32,7 @@ spring:
 application:
   security:
     jwt:
-      secret-key: at)+c=ic758b-#ea3#yhb@y^lh2d_ti9qr5j)c^y16&e7(km5$
+      secret-key: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz
       expiration: 8640000
   mail:
     frontend:
