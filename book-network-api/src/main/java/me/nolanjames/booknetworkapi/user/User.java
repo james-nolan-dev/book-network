@@ -2,6 +2,8 @@ package me.nolanjames.booknetworkapi.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import me.nolanjames.booknetworkapi.book.Book;
+import me.nolanjames.booknetworkapi.history.BookTransactionHistory;
 import me.nolanjames.booknetworkapi.role.Role;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -42,6 +44,12 @@ public class User implements UserDetails, Principal {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> bookTransactionHistoryList;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
