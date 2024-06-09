@@ -1,9 +1,6 @@
 package me.nolanjames.booknetworkapi.book;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,4 +38,17 @@ public class Book extends BaseEntity {
 
     @OneToMany(mappedBy = "book")
     private List<BookTransactionHistory> bookTransactionHistoryList;
+
+    @Transient
+    public double getRate() {
+        if (feedbackList == null || feedbackList.isEmpty()) {
+            return 0.0;
+        }
+        var rate = this.feedbackList.stream()
+                .mapToDouble(Feedback::getNote)
+                .average()
+                .orElse(0.0);
+
+        return Math.round(rate * 10.0) / 10.0;
+    }
 }
