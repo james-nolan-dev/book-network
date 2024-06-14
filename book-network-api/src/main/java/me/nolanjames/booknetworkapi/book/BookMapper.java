@@ -1,5 +1,6 @@
 package me.nolanjames.booknetworkapi.book;
 
+import me.nolanjames.booknetworkapi.file.FileUtils;
 import me.nolanjames.booknetworkapi.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class BookMapper {
                 book.getIsbn(),
                 book.getSynopsis(),
                 book.getOwner().fullName(),
-                null,
+                FileUtils.readFileFromLocation(book.getCoverImage()),
                 book.getRate(),
                 book.isArchived(),
                 book.isShareable()
